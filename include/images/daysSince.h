@@ -1,0 +1,7 @@
+#pragma once
+#include <Arduino.h>
+
+// 'editable_sign', 7x10px
+const unsigned char epd_bitmap_editable_sign [] PROGMEM = {
+	0x44, 0xfe, 0x82, 0x82, 0x82, 0x82, 0x82, 0x82, 0x82, 0xfe
+};

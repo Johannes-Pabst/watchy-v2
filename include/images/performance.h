@@ -1,0 +1,31 @@
+#pragma once
+#include <Arduino.h>
+
+// 'hourMinuteWidget', 7x7px
+const unsigned char epd_bitmap_hourMinuteWidget [] PROGMEM = {
+	0x00, 0x00, 0x10, 0x00, 0x10, 0x00, 0xee
+};
+// 'batteryWidget', 7x7px
+const unsigned char epd_bitmap_batteryWidget [] PROGMEM = {
+	0x00, 0xfc, 0xe6, 0xe6, 0xe6, 0xfc, 0x00
+};
+// 'temperatureWidget', 7x7px
+const unsigned char epd_bitmap_temperatureWidget [] PROGMEM = {
+	0x00, 0x46, 0xa8, 0x48, 0x08, 0x06, 0x00
+};
+// 'moonPhasesWidget', 7x7px
+const unsigned char epd_bitmap_moonPhasesWidget [] PROGMEM = {
+	0x38, 0x74, 0xe2, 0xe2, 0xe2, 0x74, 0x38
+};
+// 'moonRenderWidget', 7x7px
+const unsigned char epd_bitmap_moonRenderWidget [] PROGMEM = {
+	0x38, 0x64, 0xf2, 0xfa, 0xfa, 0x7c, 0x38
+};
+// 'SSOGraphWidget', 7x7px
+const unsigned char epd_bitmap_SSOGraphWidget [] PROGMEM = {
+	0x18, 0x24, 0x42, 0xfe, 0x42, 0x80, 0x80
+};
+// 'compassWidget', 7x7px
+const unsigned char epd_bitmap_compassWidget [] PROGMEM = {
+	0x82, 0x64, 0x3c, 0x28, 0x78, 0x4c, 0x82
+};
