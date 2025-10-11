@@ -29,3 +29,7 @@ const unsigned char epd_bitmap_SSOGraphWidget [] PROGMEM = {
 const unsigned char epd_bitmap_compassWidget [] PROGMEM = {
 	0x82, 0x64, 0x3c, 0x28, 0x78, 0x4c, 0x82
 };
+// 'accellerationWidget', 7x7px
+const unsigned char epd_bitmap_accellerationWidget [] PROGMEM = {
+	0x4e, 0xe6, 0x4a, 0x50, 0x64, 0x7e, 0x04
+};

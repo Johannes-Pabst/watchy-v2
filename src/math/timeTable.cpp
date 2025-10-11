@@ -1,35 +1,118 @@
 #include "math/timeTable.h"
+#include "math/time.h"
 #include "LittleFS.h"
 #include <Arduino.h>
 #include <vector>
 
 TimeGridInfo timegridinfo = TimeGridInfo{
-    std::vector<LessonInfo>{
-        LessonInfo{60 * 7 + 45, LT_SHORTBREAK},
-        LessonInfo{60 * 7 + 55, LT_LESSON},
-        LessonInfo{60 * 8 + 38, LT_SHORTBREAK},
-        LessonInfo{60 * 8 + 42, LT_LESSON},
-        LessonInfo{60 * 9 + 25, LT_LONGBREAK},
-        LessonInfo{60 * 9 + 35, LT_LESSON},
-        LessonInfo{60 * 10 + 23, LT_SHORTBREAK},
-        LessonInfo{60 * 10 + 27, LT_LESSON},
-        LessonInfo{60 * 11 + 10, LT_LONGBREAK},
-        LessonInfo{60 * 11 + 25, LT_LESSON},
-        LessonInfo{60 * 12 + 13, LT_SHORTBREAK},
-        LessonInfo{60 * 12 + 17, LT_LESSON},
-        LessonInfo{60 * 13 + 0, LT_LONGBREAK},
-        LessonInfo{60 * 13 + 15, LT_LESSON},
-        LessonInfo{60 * 13 + 55, LT_LESSON},
-        LessonInfo{60 * 14 + 40, LT_LESSON},
-        LessonInfo{60 * 15 + 30, LT_END},
+    std::vector<TimeslotInfo>{
+        TimeslotInfo{60 * 7 + 45, LT_SHORTBREAK},
+        TimeslotInfo{60 * 7 + 55, LT_LESSON},
+        TimeslotInfo{60 * 8 + 38, LT_SHORTBREAK},
+        TimeslotInfo{60 * 8 + 42, LT_LESSON},
+        TimeslotInfo{60 * 9 + 25, LT_LONGBREAK},
+        TimeslotInfo{60 * 9 + 35, LT_LESSON},
+        TimeslotInfo{60 * 10 + 23, LT_SHORTBREAK},
+        TimeslotInfo{60 * 10 + 27, LT_LESSON},
+        TimeslotInfo{60 * 11 + 10, LT_LONGBREAK},
+        TimeslotInfo{60 * 11 + 25, LT_LESSON},
+        TimeslotInfo{60 * 12 + 13, LT_SHORTBREAK},
+        TimeslotInfo{60 * 12 + 17, LT_LESSON},
+        TimeslotInfo{60 * 13 + 0, LT_LONGBREAK},
+        TimeslotInfo{60 * 13 + 15, LT_LESSON},
+        TimeslotInfo{60 * 13 + 55, LT_LESSON},
+        TimeslotInfo{60 * 14 + 40, LT_LESSON},
+        TimeslotInfo{60 * 15 + 30, LT_END},
     }};
+
+String padLeft(String s, int length)
+{
+    while (s.length() < length)
+    {
+        s = "0" + s;
+    }
+    return s;
+}
+
+TimeTableInfo timetableinfo;
+bool timetinfinstantiated = false;
 
 void parseLesson(String lstart, String lend, String ldate, String lsubject, String lroom, String lteacher, String lcode)
 {
+    int lessonId = lstart.toInt();
+    {
+        int end = lend.toInt();
+        if (lessonId < end)
+        {
+            for (int i = lessonId; i <= end; i++)
+            {
+                parseLesson(String(i), String(i), ldate, lsubject, lroom, lteacher, lcode);
+            }
+            return;
+        }
+    }
+    int dayId = timetableinfo.days.size();
+    for (int i = 0; i < timetableinfo.days.size(); i++)
+    {
+        if (timetableinfo.days[i].date == ldate)
+        {
+            dayId = i;
+        }
+    }
+    if (dayId == timetableinfo.days.size())
+    {
+        timetableinfo.days.push_back(DayInfo{
+            INT_MAX,
+            -1,
+            ldate,
+            std::vector<std::vector<LessonInfo>>{},
+        });
+    }
+    bool mandatory = !lcode.equals("canc.") && !lcode.equals("EVA");
+    if (mandatory)
+    {
+        timetableinfo.days[dayId].firstMandatoryLessonId = min(timetableinfo.days[dayId].firstMandatoryLessonId, lessonId);
+        timetableinfo.days[dayId].lastMandatoryLessonId = max(timetableinfo.days[dayId].lastMandatoryLessonId, lessonId);
+    }
+    while (timetableinfo.days[dayId].lessonTimeSlots.size() <= lessonId)
+    {
+        timetableinfo.days[dayId].lessonTimeSlots.push_back(std::vector<LessonInfo>{});
+    }
+    timetableinfo.days[dayId].lessonTimeSlots[lessonId].push_back(LessonInfo{
+        lsubject,
+        lroom,
+        lteacher,
+        lcode,
+    });
 }
 
 void parseTimeT()
 {
+    timetableinfo = TimeTableInfo{
+        -1,
+        -1,
+        "",
+        std::vector<DayInfo>{},
+    };
+    SimpleTime t = simpleNow();
+    int minute = t.hour * 60 + t.minute;
+    timetableinfo.date = String(t.year) + padLeft(String(t.month), 2) + padLeft(String(t.day), 2);
+    for (int i = 0; i < timegridinfo.lessons.size(); i++)
+    {
+        if (minute > timegridinfo.lessons[i].endMin)
+        {
+            timetableinfo.timeGridId++;
+            ;
+            if (timegridinfo.lessons[i].type == LT_LESSON)
+            {
+                timetableinfo.lessonId++;
+            }
+        }
+        else
+        {
+            break;
+        }
+    }
     File file = LittleFS.open("timet");
     if (!file)
         return;
@@ -101,4 +184,10 @@ void parseTimeT()
         bufId++;
     }
     file.close();
+    timetinfinstantiated = true;
+}
+void parseTimeTLazy(){
+    if(!timetinfinstantiated){
+        parseTimeT();
+    }
 }

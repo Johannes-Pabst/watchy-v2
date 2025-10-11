@@ -145,6 +145,22 @@ bool getAcc(Accel &acc)
 {
     return sensor.getAccel(acc);
 }
+RTC_SLOW_ATTR int lastX;
+RTC_SLOW_ATTR int lastY;
+RTC_SLOW_ATTR int lastZ;
+bool shouldTurnOff(){
+    Accel acc;
+    if(!getAcc(acc)){
+        return false;
+    }
+    int diffX=abs(acc.x-lastX);
+    int diffY=abs(acc.y-lastY);
+    int diffZ=abs(acc.z-lastZ);
+    lastX=acc.x;
+    lastY=acc.y;// -43 55 -1015
+    lastZ=acc.z;
+    return diffX<5&&diffY<5&&diffZ<5&&abs(acc.x)<100&&abs(acc.y)<100&&acc.z>950;
+}
 void initSensor()
 {
     Wire.begin(SDA, SCL);

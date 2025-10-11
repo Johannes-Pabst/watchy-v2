@@ -5,6 +5,7 @@
 #include "hardware/bma.h"
 #include "hardware/buttons.h"
 #include "hardware/buzzer.h"
+#include "hardware/battery.h"
 #include "hardware/hardwareManager.h"
 #include "display/watchFace.h"
 #include "menu/main.h"
@@ -24,6 +25,10 @@ void setup()
         openMainMenu();
     }
     watchFace();
+    checkEmergencyShutdown();
+    if(reason==ESP_SLEEP_WAKEUP_EXT0&&shouldTurnOff()){
+        autoShutdown();
+    }
     enableMinutelyWakeup();
     enableWakeupOnButtonPress();
     hibernateHardware();

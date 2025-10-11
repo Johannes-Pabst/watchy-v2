@@ -3,3 +3,4 @@
 float getBatteryVoltage();
 float getBatteryPercentage();
 void checkEmergencyShutdown();
+void autoShutdown();

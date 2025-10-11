@@ -4,6 +4,7 @@
 #include <vector>
 #include "hardware/wifi.h"
 #include "hardware/buttons.h"
+#include "hardware/hardwareManager.h"
 
 #include <LittleFS.h>
 #include "display/text.h"
@@ -13,7 +14,7 @@
 #include "hardware/bluetooth.h"
 
 void openMainMenu(){
-    switch(drawMenu(std::vector<String>{"open AP", "show options", "update RTC", "clear cache"})){
+    switch(drawMenu(std::vector<String>{"open AP", "show options", "update RTC", "clear cache", "shut down"})){
         case 0:
         setupAP();
         awaitButtonPress(0);
@@ -44,6 +45,14 @@ void openMainMenu(){
         case 3:
         clearMoonPhaseCache();
         clearSSOGraphCache();
+        break;
+        case 4:
+        dp.setFullWindow();
+        dp.fillScreen(bg_color);
+        textBox("manually\nshut down.\npress any\nbutton\nto wake up.", 10, 10, DISPLAY_WIDTH-20, DISPLAY_HEIGHT-20, TD_CENTER_CENTER, __null, 2, fg_color);
+        dp.display(false);
+        enableWakeupOnButtonPress();
+        shutdownHardware();
         break;
         // case 3:
         // bluetoothMouseSetup();

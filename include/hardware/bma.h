@@ -9,5 +9,6 @@ uint32_t getSteps();
 float getTemp();
 void resetSteps();
 bool getAcc(Accel &acc);
+bool shouldTurnOff();
 void enablePickupWakeup();
 void shutdownSensor();

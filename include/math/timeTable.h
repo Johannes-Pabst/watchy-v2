@@ -7,18 +7,42 @@
 #define LT_LESSON 2
 #define LT_END 2
 
-struct LessonInfo{
+struct TimeslotInfo
+{
     int endMin;
     int type;
 };
-struct TimeGridInfo{
-    std::vector<LessonInfo> lessons;
+struct TimeGridInfo
+{
+    std::vector<TimeslotInfo> lessons;
 };
 
-struct TimeTableInfo{
-    int firstLessonId;
-    int lastLessonId;
+struct DayInfo{
+    int firstMandatoryLessonId; // 1-based
+    int lastMandatoryLessonId;
+    String date;
+    std::vector<std::vector<LessonInfo>> lessonTimeSlots;
+};
+
+struct LessonInfo
+{
+    String subject;
+    String room;
+    String teacher;
+    String code;
+};
+
+struct TimeTableInfo
+{
+    int timeGridId;
+    int lessonId; // 1 means first lesson has started
+    String date;
+    std::vector<DayInfo> days;
 };
 
 extern TimeGridInfo timegridinfo;
 extern TimeTableInfo timetableinfo;
+
+void parseLesson(String lstart, String lend, String ldate, String lsubject, String lroom, String lteacher, String lcode);
+void parseTimeT();
+void parseTimeTLazy();

@@ -35,7 +35,7 @@ void drawPerformanceWidget(int16_t x, int16_t y)
     {
         PerformanceMeasurement &m = measurements[i];
         dp.drawBitmap(x, y + i * 8, m.bitmap, 7, 7, fg_color);
-        textBox(String(m.duration)+"ms", x + 8, y + i * 8, 6*5, 8, TD_TOP_LEFT);
+        textBox(String(m.duration)+"", x + 8, y + i * 8, 6*5, 8, TD_TOP_LEFT);
     }
     measurements.clear();
 }
