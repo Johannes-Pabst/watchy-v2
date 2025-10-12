@@ -33,3 +33,11 @@ const unsigned char epd_bitmap_compassWidget [] PROGMEM = {
 const unsigned char epd_bitmap_accellerationWidget [] PROGMEM = {
 	0x4e, 0xe6, 0x4a, 0x50, 0x64, 0x7e, 0x04
 };
+// 'stepsWidget', 7x7px
+const unsigned char epd_bitmap_stepsWidget [] PROGMEM = {
+	0x3a, 0x46, 0x8e, 0x00, 0x10, 0x38, 0x10
+};
+// 'leapyearWidget', 7x7px
+const unsigned char epd_bitmap_leapyearWidget [] PROGMEM = {
+	0x0c, 0x16, 0x9e, 0xd8, 0xf8, 0x78, 0x28
+};

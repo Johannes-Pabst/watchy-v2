@@ -5,9 +5,11 @@
 #include "html/config.h"
 #include <LittleFS.h>
 #include "math/config.h"
+#include "math/time.h"
 #include <Arduino.h>
 #include "hardware/display.h"
 #include "display/qr.h"
+#include "display/text.h"
 #include "display/alignment.h"
 #include <WiFiMulti.h>
 #include <vector>
@@ -167,8 +169,10 @@ void disconnectWifi()
     WiFi.disconnect(true);
     WiFi.mode(WIFI_OFF);
 }
+RTC_SLOW_ATTR SimpleTime lastNtpUpdate;
 void updateRtc()
 {
+    SimpleTime bevore=simpleNow();
     configTime(0, 0, "pool.ntp.org");
 
     // Wait until time is retrieved
@@ -195,6 +199,14 @@ void updateRtc()
 
     // Set Watchy RTC
     RTC.set(rtcData);
+    SimpleTime after=simpleNow();
+    int diff=(after.hour*3600+after.minute*60+after.second)-(bevore.hour*3600+bevore.minute*60+bevore.second);
+    int diff2=(bevore.hour*3600+bevore.minute*60+bevore.second)-(lastNtpUpdate.hour*3600+lastNtpUpdate.minute*60+lastNtpUpdate.second);
+    lastNtpUpdate=after;
+    dp.setFullWindow();
+    dp.fillScreen(bg_color);
+    textBox("RTC update\nsuccess!\ncorrected by\n"+String(diff)+"s\nin\n"+String(diff2)+"s\nthat's\n"+String(float(diff)/float(diff2))+"s/s", 0, 0, DISPLAY_WIDTH, DISPLAY_HEIGHT, TD_CENTER_CENTER, __null, 2, fg_color);
+    dp.display(false);
 }
 bool updateTimeT()
 {

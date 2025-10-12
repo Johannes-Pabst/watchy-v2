@@ -12,6 +12,8 @@
 #include "display/daysSince.h"
 #include "display/performanceWidget.h"
 #include "display/accelleration.h"
+#include "display/stepsWidget.h"
+#include "display/leapyear.h"
 #include "math/sky.h"
 #include "images/tinyFont.h"
 
@@ -29,9 +31,16 @@ void watchFace(){
     measureFn(compassWidget, (50+19+(28+6+50), 19, 19, EarthsMoon));
     measureFn(compassWidget, (50+19+(28+6+50), 19+38, 19, Sun));
     measureFn(accellerationWidget, (0, 24+16));
+    measureFn(stepsWidget, (0, 24+16+24));
+    measureFn(leapyearWidget, (0, 24+16+24+8));
     drawPerformanceWidget(50+19+(28+6+50)+19, 0);
-
-    // drawQr("https://smart-watch.online-coding.de/",0,DISPLAY_HEIGHT/2, DISPLAY_WIDTH, DISPLAY_HEIGHT/2, TD_CENTER_CENTER);
     
     dp.display(esp_sleep_get_wakeup_cause() == ESP_SLEEP_WAKEUP_EXT0);
 }
+/*
+TODO:
+day in month,
+month,
+year,
+weekday,
+*/

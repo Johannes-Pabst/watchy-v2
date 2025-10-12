@@ -1,6 +1,7 @@
 #include "math/timeTable.h"
 #include "math/time.h"
 #include "LittleFS.h"
+#include "math/padUtils.h"
 #include <Arduino.h>
 #include <vector>
 
@@ -24,15 +25,6 @@ TimeGridInfo timegridinfo = TimeGridInfo{
         TimeslotInfo{60 * 14 + 40, LT_LESSON},
         TimeslotInfo{60 * 15 + 30, LT_END},
     }};
-
-String padLeft(String s, int length)
-{
-    while (s.length() < length)
-    {
-        s = "0" + s;
-    }
-    return s;
-}
 
 TimeTableInfo timetableinfo;
 bool timetinfinstantiated = false;

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <Arduino.h>
 
 #define LT_SHORTBREAK 0
 #define LT_LONGBREAK 1
@@ -12,16 +13,10 @@ struct TimeslotInfo
     int endMin;
     int type;
 };
+
 struct TimeGridInfo
 {
     std::vector<TimeslotInfo> lessons;
-};
-
-struct DayInfo{
-    int firstMandatoryLessonId; // 1-based
-    int lastMandatoryLessonId;
-    String date;
-    std::vector<std::vector<LessonInfo>> lessonTimeSlots;
 };
 
 struct LessonInfo
@@ -30,6 +25,13 @@ struct LessonInfo
     String room;
     String teacher;
     String code;
+};
+
+struct DayInfo{
+    int firstMandatoryLessonId; // 1-based
+    int lastMandatoryLessonId;
+    String date;
+    std::vector<std::vector<LessonInfo>> lessonTimeSlots;
 };
 
 struct TimeTableInfo
