@@ -141,8 +141,6 @@ void connectWifi()
         String password = parseText("Password", networks[i]);
         Serial.print("Adding AP: ");
         Serial.println(ssid);
-        Serial.print("With password: ");
-        Serial.println(password);
         wifimulti.addAP(ssid.c_str(), password.c_str());
     }
 }
@@ -212,20 +210,27 @@ bool updateTimeT()
 {
     JSONVar cfg = parseCategory("timetable", config);
     String url = parseText("url", cfg);
+    Serial.println("1");
     if (url == "")
-        return false;
+    return false;
     WiFiClientSecure *client = new WiFiClientSecure;
+    client->setInsecure();
+    Serial.println("2");
     if (!client)
-        return false;
+    return false;
     client->setInsecure();
     HTTPClient https;
+    Serial.println("3");
     if (!https.begin(*client, url))
-        return false;
+    return false;
+    Serial.println("4");
     if (https.GET() != HTTP_CODE_OK)
-        return false;
-    File file = LittleFS.open("timet");
+    return false;
+    File file = LittleFS.open("/timet", "w", true);
+    Serial.println("5");
     if (!file)
-        return false;
+    return false;
+    Serial.println("6");
     https.writeToStream(&file);
     https.end();
     return true;

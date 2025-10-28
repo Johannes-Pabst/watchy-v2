@@ -4,6 +4,7 @@
 #include <vector>
 #include "hardware/wifi.h"
 #include "hardware/buttons.h"
+#include "hardware/buzzer.h"
 #include "hardware/hardwareManager.h"
 
 #include <LittleFS.h>
@@ -14,7 +15,7 @@
 #include "hardware/bluetooth.h"
 
 void openMainMenu(){
-    switch(drawMenu(std::vector<String>{"open AP", "show options", "update RTC", "clear cache", "shut down"})){
+    switch(drawMenu(std::vector<String>{"open AP", "show options", "update RTC", "clear cache", "fetch timetable", "shut down"})){
         case 0:
         setupAP();
         awaitButtonPress(0);
@@ -47,6 +48,18 @@ void openMainMenu(){
         clearSSOGraphCache();
         break;
         case 4:
+        connectWifi();
+        waitForConnection();
+        if(updateTimeT()){
+            buzz(100);
+        }else{
+            buzz(100);
+            delay(100);
+            buzz(100);
+        }
+        disconnectWifi();
+        break;
+        case 5:
         dp.setFullWindow();
         dp.fillScreen(bg_color);
         textBox("manually\nshut down.\npress any\nbutton\nto wake up.", 10, 10, DISPLAY_WIDTH-20, DISPLAY_HEIGHT-20, TD_CENTER_CENTER, __null, 2, fg_color);

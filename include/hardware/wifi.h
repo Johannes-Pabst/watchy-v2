@@ -6,3 +6,4 @@ void connectWifi();
 void waitForConnection();
 void disconnectWifi();
 void updateRtc();
+bool updateTimeT();
