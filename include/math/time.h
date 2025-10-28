@@ -23,3 +23,4 @@ SimpleTime fromRtc(tmElements_t &t);
 SimpleTime simpleNow();
 SimpleTime simpleNowUTC();
 void fixTime(SimpleTime &t);
+long getUnixTimestamp(SimpleTime &t);

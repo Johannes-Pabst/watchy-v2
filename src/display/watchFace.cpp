@@ -14,6 +14,8 @@
 #include "display/accelleration.h"
 #include "display/stepsWidget.h"
 #include "display/leapyear.h"
+#include "display/nextLessonsWidget.h"
+#include "display/unixTimestampWidget.h"
 #include "math/sky.h"
 #include "images/tinyFont.h"
 
@@ -24,7 +26,7 @@ void watchFace(){
     measureFn(hourMinuteWidget, (0,0,DISPLAY_WIDTH,DISPLAY_HEIGHT,&tinyFont,6));
     measureFn(batteryWidget, (0,0));
     measureFn(temperatureWidget, (0,24));
-    measureFn(moonRenderWidget, (10, 150, 7));
+    measureFn(moonRenderWidget, (10, 130, 7));
     measureFn(moonPhasesWidget, (30, 0));
     measureFn(SSOGraphWidget, (50, 0,28+6+50,38, EarthsMoon, TD1_START));
     measureFn(SSOGraphWidget, (50, 38,28+6+50,38, Sun, TD1_END));
@@ -33,6 +35,8 @@ void watchFace(){
     measureFn(accellerationWidget, (0, 24+16));
     measureFn(stepsWidget, (0, 24+16+24));
     measureFn(leapyearWidget, (0, 24+16+24+8));
+    measureFn(nextLessonsWidget, (10, 150, 3));
+    measureFn(unixTimestampWidget, (10, 140));
     drawPerformanceWidget(50+19+(28+6+50)+19, 0);
     
     dp.display(esp_sleep_get_wakeup_cause() == ESP_SLEEP_WAKEUP_EXT0);
