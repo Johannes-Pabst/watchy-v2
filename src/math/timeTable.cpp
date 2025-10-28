@@ -82,12 +82,13 @@ void parseTimeT()
 {
     timetableinfo = TimeTableInfo{
         -1,
-        -1,
+        0,
         "",
         std::vector<DayInfo>{},
     };
     SimpleTime t = simpleNow();
     int minute = t.hour * 60 + t.minute;
+    // int minute=8*60+30; // for testing
     timetableinfo.date = String(t.year) + padLeft(String(t.month), 2) + padLeft(String(t.day), 2);
     for (int i = 0; i < timegridinfo.lessons.size(); i++)
     {
@@ -105,7 +106,7 @@ void parseTimeT()
             break;
         }
     }
-    File file = LittleFS.open("timet");
+    File file = LittleFS.open("/timet");
     if (!file)
         return;
     char buffer[20];

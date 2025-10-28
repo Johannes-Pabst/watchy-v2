@@ -49,3 +49,7 @@ const unsigned char epd_bitmap_nextLessonsWidget [] PROGMEM = {
 const unsigned char epd_bitmap_unixTimestampWidget [] PROGMEM = {
 	0x60, 0x80, 0x40, 0x20, 0xc0, 0x1e, 0x64
 };
+// 'dateWidget', 7x7px
+const unsigned char epd_bitmap_dateWidget [] PROGMEM = {
+	0x28, 0x7c, 0xfe, 0x82, 0x82, 0x82, 0x7c
+};

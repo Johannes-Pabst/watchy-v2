@@ -35,7 +35,7 @@ void watchFace(){
     measureFn(accellerationWidget, (0, 24+16));
     measureFn(stepsWidget, (0, 24+16+24));
     measureFn(leapyearWidget, (0, 24+16+24+8));
-    measureFn(nextLessonsWidget, (10, 150, 3));
+    measureFn(nextLessonsWidget, (10, 150, 4));
     measureFn(unixTimestampWidget, (10, 140));
     drawPerformanceWidget(50+19+(28+6+50)+19, 0);
     

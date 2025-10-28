@@ -6,7 +6,7 @@
 #define LT_SHORTBREAK 0
 #define LT_LONGBREAK 1
 #define LT_LESSON 2
-#define LT_END 2
+#define LT_END 3
 
 struct TimeslotInfo
 {

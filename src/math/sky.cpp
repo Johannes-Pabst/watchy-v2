@@ -37,7 +37,6 @@ void resetEphemeris(){
         if(longitude==0.0){
             longitude=-40.0;
         }
-        Serial.println("Lat: "+String(latitude)+" Lon: "+String(longitude));
         riseSetAltitude = parseFloat("rise and set elevation", cfg);
         sky_config_initialized=true;
     }
