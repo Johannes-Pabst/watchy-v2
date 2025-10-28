@@ -41,3 +41,11 @@ const unsigned char epd_bitmap_stepsWidget [] PROGMEM = {
 const unsigned char epd_bitmap_leapyearWidget [] PROGMEM = {
 	0x0c, 0x16, 0x9e, 0xd8, 0xf8, 0x78, 0x28
 };
+// 'nextLessonsWidget', 7x7px
+const unsigned char epd_bitmap_nextLessonsWidget [] PROGMEM = {
+	0x92, 0xb6, 0x92, 0x52, 0x00, 0x54, 0x00
+};
+// 'unixTimestampWidget', 7x7px
+const unsigned char epd_bitmap_unixTimestampWidget [] PROGMEM = {
+	0x60, 0x80, 0x40, 0x20, 0xc0, 0x1e, 0x64
+};

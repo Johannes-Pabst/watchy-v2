@@ -200,8 +200,8 @@ void updateRtc()
     // Set Watchy RTC
     RTC.set(rtcData);
     SimpleTime after=simpleNow();
-    int diff=(after.hour*3600+after.minute*60+after.second)-(bevore.hour*3600+bevore.minute*60+bevore.second);
-    int diff2=(bevore.hour*3600+bevore.minute*60+bevore.second)-(lastNtpUpdate.hour*3600+lastNtpUpdate.minute*60+lastNtpUpdate.second);
+    int diff=getUnixTimestamp(after)-getUnixTimestamp(bevore);
+    int diff2=getUnixTimestamp(bevore)-getUnixTimestamp(lastNtpUpdate);
     lastNtpUpdate=after;
     dp.setFullWindow();
     dp.fillScreen(bg_color);

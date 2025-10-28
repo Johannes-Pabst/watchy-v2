@@ -185,3 +185,21 @@ SimpleTime simpleNowUTC()
     RTC.read(time);
     return fromRtc(time);
 }
+long getUnixTimestamp(SimpleTime &t){
+    long timestamp = 0;
+    timestamp+= t.second;
+    timestamp+= t.minute * 60;
+    timestamp+= t.hour * 3600;
+    timestamp+= (t.day -1) * 86400;
+    for(int m=1; m<t.month; m++){
+        timestamp+= getMonthLength(m, t.year) * 86400;
+    }
+    for(int y=1970; y<t.year; y++){
+        if(isLeapYear(y)){
+            timestamp+= 366 * 86400;
+        } else {
+            timestamp+= 365 * 86400;
+        }
+    }
+    return timestamp;
+}
