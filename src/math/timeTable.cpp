@@ -80,8 +80,8 @@ void parseLesson(String lstart, String lend, String ldate, String lsubject, Stri
 
 int getMinute(){
     SimpleTime t = simpleNow();
-    // int minute = t.hour * 60 + t.minute;
-    int minute=8*60+30; // for testing
+    int minute = t.hour * 60 + t.minute;
+    // int minute=8*60+30; // for testing
     return minute;
 }
 
