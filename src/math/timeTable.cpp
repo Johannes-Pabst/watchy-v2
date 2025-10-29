@@ -78,6 +78,13 @@ void parseLesson(String lstart, String lend, String ldate, String lsubject, Stri
     });
 }
 
+int getMinute(){
+    SimpleTime t = simpleNow();
+    // int minute = t.hour * 60 + t.minute;
+    int minute=8*60+30; // for testing
+    return minute;
+}
+
 void parseTimeT()
 {
     timetableinfo = TimeTableInfo{
@@ -87,8 +94,7 @@ void parseTimeT()
         std::vector<DayInfo>{},
     };
     SimpleTime t = simpleNow();
-    int minute = t.hour * 60 + t.minute;
-    // int minute=8*60+30; // for testing
+    int minute=getMinute();
     timetableinfo.date = String(t.year) + padLeft(String(t.month), 2) + padLeft(String(t.day), 2);
     for (int i = 0; i < timegridinfo.lessons.size(); i++)
     {
