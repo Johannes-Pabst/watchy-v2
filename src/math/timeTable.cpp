@@ -92,7 +92,7 @@ void parseTimeT()
     timetableinfo.date = String(t.year) + padLeft(String(t.month), 2) + padLeft(String(t.day), 2);
     for (int i = 0; i < timegridinfo.lessons.size(); i++)
     {
-        if (minute > timegridinfo.lessons[i].endMin)
+        if (minute > timegridinfo.lessons[i].startMin)
         {
             timetableinfo.timeGridId++;
             ;
@@ -184,3 +184,22 @@ void parseTimeTLazy(){
         parseTimeT();
     }
 }
+bool isSchool(){
+    parseTimeTLazy();
+    return timetableinfo.timeGridId>=0&&timetableinfo.timeGridId<timegridinfo.lessons.size()-1;
+}
+/* 
+better protocoll:
+
+u16 lesson#
+u32 days since 1970
+u16 subjId
+u16 roomId
+u16 teacherId
+u16 flags:
+u1  cancelled
+u1  hasMessage
+u1  hasHomework
+...
+u16 flagStrStartId
+*/

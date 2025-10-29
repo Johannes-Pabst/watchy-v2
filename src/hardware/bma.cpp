@@ -148,6 +148,7 @@ bool getAcc(Accel &acc)
 RTC_SLOW_ATTR int lastX;
 RTC_SLOW_ATTR int lastY;
 RTC_SLOW_ATTR int lastZ;
+RTC_SLOW_ATTR int consecutiveNoMove;
 bool shouldTurnOff(){
     Accel acc;
     if(!getAcc(acc)){
@@ -159,7 +160,13 @@ bool shouldTurnOff(){
     lastX=acc.x;
     lastY=acc.y;// -43 55 -1015
     lastZ=acc.z;
-    return diffX<5&&diffY<5&&diffZ<5&&abs(acc.x)<100&&abs(acc.y)<100&&acc.z>950;
+    bool noMove=diffX<5&&diffY<5&&diffZ<5;
+    if(noMove){
+        consecutiveNoMove++;
+    }else{
+        consecutiveNoMove=0;
+    }
+    return noMove&&((abs(acc.x)<100&&abs(acc.y)<100&&acc.z>950)||consecutiveNoMove>=5);
 }
 void initSensor()
 {

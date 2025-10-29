@@ -53,3 +53,7 @@ const unsigned char epd_bitmap_unixTimestampWidget [] PROGMEM = {
 const unsigned char epd_bitmap_dateWidget [] PROGMEM = {
 	0x28, 0x7c, 0xfe, 0x82, 0x82, 0x82, 0x7c
 };
+// 'timeTableProgressBar', 7x7px
+const unsigned char epd_bitmap_timeTableProgressBar [] PROGMEM = {
+	0x00, 0x54, 0x00, 0xea, 0xf4, 0xea, 0xf4
+};

@@ -23,6 +23,10 @@ void nextLessonsWidget(int x, int y, int number)
     }
     DayInfo &curDay = timetableinfo.days[curDayId];
     int timeGridId = timetableinfo.timeGridId;
+    if(timeGridId<0){
+        textBox("Hasn't started yet", x, y, 200, 8, TD_TOP_LEFT, nullptr, 1, fg_color);
+        return;
+    }
     for (int i = 0; i < number; i++)
     {
         if (timegridinfo.lessons.size() <= timeGridId)
@@ -53,6 +57,8 @@ void nextLessonsWidget(int x, int y, int number)
                 }
             }
             textBox("b"+String(breakIndex), x, y + i * 8, 200, 8, TD_TOP_LEFT, nullptr, 1, fg_color);
+        }else if(type==LT_SHORTBREAK){
+            textBox("sb", x, y + i * 8, 200, 8, TD_TOP_LEFT, nullptr, 1, fg_color);
         }
         timeGridId++;
         while (timegridinfo.lessons.size() > timeGridId && (timegridinfo.lessons[timeGridId].type == LT_SHORTBREAK||timegridinfo.lessons[timeGridId].type == LT_END))

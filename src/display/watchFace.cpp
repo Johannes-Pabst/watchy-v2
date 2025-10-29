@@ -16,6 +16,7 @@
 #include "display/leapyear.h"
 #include "display/nextLessonsWidget.h"
 #include "display/unixTimestampWidget.h"
+#include "display/timeTableProgressBar.h"
 #include "math/sky.h"
 #include "images/tinyFont.h"
 
@@ -36,7 +37,7 @@ void watchFace(){
     measureFn(stepsWidget, (0, 24+16+24));
     measureFn(leapyearWidget, (0, 24+16+24+8));
     measureFn(nextLessonsWidget, (10, 150, 4));
-    measureFn(unixTimestampWidget, (10, 140));
+    measureFn(timeTableProgressBar, (0, 180, DISPLAY_WIDTH, 10));
     drawPerformanceWidget(50+19+(28+6+50)+19, 0);
     
     dp.display(esp_sleep_get_wakeup_cause() == ESP_SLEEP_WAKEUP_EXT0);
