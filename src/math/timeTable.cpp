@@ -92,7 +92,7 @@ void parseTimeT()
     timetableinfo.date = String(t.year) + padLeft(String(t.month), 2) + padLeft(String(t.day), 2);
     for (int i = 0; i < timegridinfo.lessons.size(); i++)
     {
-        if (minute > timegridinfo.lessons[i].startMin)
+        if (minute >= timegridinfo.lessons[i].startMin)
         {
             timetableinfo.timeGridId++;
             ;
