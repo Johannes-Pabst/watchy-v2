@@ -9,8 +9,7 @@ void timeTableProgressBar(int16_t x, int16_t y, int16_t w, int16_t h){
     if(isSchool()){
         int startTime=timegridinfo.lessons[timetableinfo.timeGridId].startMin;
         int endTime=timegridinfo.lessons[timetableinfo.timeGridId+1].startMin;
-        SimpleTime now=simpleNow();
-        int nowMinutes=now.hour*60+now.minute;
+        int nowMinutes=getMinute();
         float progress=float(nowMinutes-startTime)/float(endTime-startTime);
         float nextProgress=float(nowMinutes-startTime+1)/float(endTime-startTime);
         textBox(String(startTime/60)+":"+String(startTime%60), x, y, w, h, TD_TOP_LEFT, nullptr, 1, fg_color);
@@ -18,12 +17,17 @@ void timeTableProgressBar(int16_t x, int16_t y, int16_t w, int16_t h){
         textBox(String(int(progress*100))+"%", x, y, w, h, TD_TOP_CENTER, nullptr, 1, fg_color);
         textBox(String(nowMinutes-startTime), x, y, w/2, h, TD_TOP_CENTER, nullptr, 1, fg_color);
         textBox(String(endTime-nowMinutes), x+w/2, y, w/2, h, TD_TOP_CENTER, nullptr, 1, fg_color);
-        dp.fillRect(x, y+7, int(round(float(w)*progress)), h-7, fg_color);
-        for(int ix=0;ix<int(round(float(w)*progress));ix++){
+        dp.fillRect(x, y+7, int(float(w)*progress), h-7, fg_color);
+        Serial.println(x);
+        Serial.println(y+7);
+        Serial.println(int(float(w)*progress));
+        Serial.println(h-7);
+        for(int ix=int(float(w)*progress);ix<w;ix++){
             for(int iy=0;iy<h-7;iy++){
                 int m3=(ix+iy)%3;
-                if(m3==0||(m3==1&&))
-                dp.drawPixel(x+ix, y+iy+7, bg_color);
+                if(m3==0||(m3==1&&ix<int(float(w)*nextProgress))){
+                    dp.drawPixel(x+ix, y+iy+7, fg_color);
+                }
             }
         }
     }

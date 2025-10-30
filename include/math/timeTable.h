@@ -49,3 +49,4 @@ void parseLesson(String lstart, String lend, String ldate, String lsubject, Stri
 void parseTimeT();
 void parseTimeTLazy();
 bool isSchool();
+int getMinute();
