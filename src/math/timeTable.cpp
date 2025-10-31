@@ -84,6 +84,12 @@ int getMinute(){
     // int minute=8*60+30; // for testing
     return minute;
 }
+int getSecond(){
+    SimpleTime t = simpleNow();
+    int second = t.hour * 60*60 + t.minute*60 + t.second;
+    // int second=8*60*60+30*60; // for testing
+    return second;
+}
 
 void parseTimeT()
 {

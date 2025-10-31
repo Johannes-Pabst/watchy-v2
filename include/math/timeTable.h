@@ -50,3 +50,4 @@ void parseTimeT();
 void parseTimeTLazy();
 bool isSchool();
 int getMinute();
+int getSecond();

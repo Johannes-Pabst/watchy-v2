@@ -21,7 +21,7 @@ void setup()
     {
         buzz(100);
     }
-    if(reason==ESP_SLEEP_WAKEUP_EXT1&&(pins&MENU_BTN_MASK)){
+    if((reason==ESP_SLEEP_WAKEUP_EXT1&&(pins&MENU_BTN_MASK))||digitalRead(MENU_BTN_PIN)==HIGH){
         openMainMenu();
     }
     watchFace();
