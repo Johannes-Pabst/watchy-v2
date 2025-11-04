@@ -190,9 +190,27 @@ void parseTimeTLazy(){
         parseTimeT();
     }
 }
-bool isSchool(){
+int getCurDayId(){
+    parseTimeTLazy();
+    int curDayId = -1;
+    for (int i = 0; i < timetableinfo.days.size(); i++)
+    {
+        if (timetableinfo.days[i].date == timetableinfo.date)
+        {
+            curDayId = i;
+            break;
+        }
+    }
+    return curDayId;
+}
+bool isSchoolTime(){
     parseTimeTLazy();
     return timetableinfo.timeGridId>=0&&timetableinfo.timeGridId<timegridinfo.lessons.size()-1;
+}
+bool isSchool(){
+    parseTimeTLazy();
+    int curDayId = getCurDayId();
+    return timetableinfo.timeGridId>=timetableinfo.days[curDayId].firstMandatoryLessonId&&timetableinfo.timeGridId<=timetableinfo.days[curDayId].lastMandatoryLessonId;
 }
 /* 
 better protocoll:

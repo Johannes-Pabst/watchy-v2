@@ -48,5 +48,7 @@ extern TimeTableInfo timetableinfo;
 void parseLesson(String lstart, String lend, String ldate, String lsubject, String lroom, String lteacher, String lcode);
 void parseTimeT();
 void parseTimeTLazy();
-bool isSchool();
+bool isSchoolTime();
 int getMinute();
+bool isSchool();
+int getCurDayId();
