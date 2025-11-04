@@ -52,3 +52,5 @@ bool isSchoolTime();
 int getMinute();
 bool isSchool();
 int getCurDayId();
+int getMinute();
+int getSecond();

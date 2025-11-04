@@ -84,6 +84,12 @@ int getMinute(){
     // int minute=8*60+30; // for testing
     return minute;
 }
+int getSecond(){
+    SimpleTime t = simpleNow();
+    int second = t.hour * 60*60 + t.minute*60 + t.second;
+    // int second=8*60*60+30*60; // for testing
+    return second;
+}
 
 void parseTimeT()
 {
@@ -98,7 +104,7 @@ void parseTimeT()
     timetableinfo.date = String(t.year) + padLeft(String(t.month), 2) + padLeft(String(t.day), 2);
     for (int i = 0; i < timegridinfo.lessons.size(); i++)
     {
-        if (minute > timegridinfo.lessons[i].startMin)
+        if (minute >= timegridinfo.lessons[i].startMin)
         {
             timetableinfo.timeGridId++;
             ;

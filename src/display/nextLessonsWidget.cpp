@@ -41,6 +41,9 @@ void nextLessonsWidget(int x, int y, int number)
                     lessonIndex++;
                 }
             }
+            if(lessonIndex>=curDay.lessonTimeSlots.size()){
+                break;
+            }
             std::vector<LessonInfo> &lessons = curDay.lessonTimeSlots[lessonIndex];
             String lessonTimeStr = "";
             for (int j = 0; j < lessons.size(); j++)
