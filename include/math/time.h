@@ -6,7 +6,7 @@ struct SimpleTime {
   int second; 
   int minute; 
   int hour; 
-  int wday;   // day of week, sunday is day 1
+  int wday;   // day of week, monday is 0
   int day;
   int month; 
   int year;

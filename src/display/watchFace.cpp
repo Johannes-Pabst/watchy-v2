@@ -17,6 +17,7 @@
 #include "display/nextLessonsWidget.h"
 #include "display/unixTimestampWidget.h"
 #include "display/timeTableProgressBar.h"
+#include "display/dateWidget.h"
 #include "math/sky.h"
 #include "images/tinyFont.h"
 
@@ -37,6 +38,7 @@ void watchFace(){
     measureFn(stepsWidget, (0, 24+16+24));
     measureFn(leapyearWidget, (0, 24+16+24+8));
     measureFn(unixTimestampWidget, (10, 140));
+    measureFn(dateWidget, (30, 120));
     measureFn(nextLessonsWidget, (10, 150, 4));
     measureFn(timeTableProgressBar, (0, 180, DISPLAY_WIDTH, 10));
     drawPerformanceWidget(50+19+(28+6+50)+19, 0);
