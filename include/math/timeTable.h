@@ -54,3 +54,4 @@ bool isSchool();
 int getCurDayId();
 int getMinute();
 int getSecond();
+int getLessonId(int timeGridId);

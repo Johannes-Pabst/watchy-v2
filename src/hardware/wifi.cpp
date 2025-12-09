@@ -170,8 +170,12 @@ void disconnectWifi()
 RTC_SLOW_ATTR SimpleTime lastNtpUpdate;
 void updateRtc()
 {
-    SimpleTime bevore=simpleNow();
+    Serial.println("h1");
+    SimpleTime bevore = simpleNow();
+    setenv("TZ", "UTC0", 1);
+    tzset();
     configTime(0, 0, "pool.ntp.org");
+    Serial.println("h1");
 
     // Wait until time is retrieved
     struct tm timeinfo;
@@ -186,6 +190,7 @@ void updateRtc()
                   timeinfo.tm_hour, timeinfo.tm_min, timeinfo.tm_sec,
                   timeinfo.tm_year + 1900, timeinfo.tm_mon + 1, timeinfo.tm_mday);
 
+    Serial.println("h1");
     // Convert to RTC_DATA_STRUCT
     tmElements_t rtcData;
     rtcData.Hour = timeinfo.tm_hour;
@@ -195,15 +200,17 @@ void updateRtc()
     rtcData.Month = timeinfo.tm_mon + 1;
     rtcData.Year = timeinfo.tm_year + 1900 - 1970;
 
+    Serial.println("h1");
     // Set Watchy RTC
     RTC.set(rtcData);
-    SimpleTime after=simpleNow();
-    int diff=getUnixTimestamp(after)-getUnixTimestamp(bevore);
-    int diff2=getUnixTimestamp(bevore)-getUnixTimestamp(lastNtpUpdate);
-    lastNtpUpdate=after;
+    SimpleTime after = simpleNow();
+    int diff = getUnixTimestamp(after) - getUnixTimestamp(bevore);
+    int diff2 = getUnixTimestamp(bevore) - getUnixTimestamp(lastNtpUpdate);
+    lastNtpUpdate = after;
+    Serial.println("h1");
     dp.setFullWindow();
     dp.fillScreen(bg_color);
-    textBox("RTC update\nsuccess!\ncorrected by\n"+String(diff)+"s\nin\n"+String(diff2)+"s\nthat's\n"+String(float(diff)/float(diff2))+"s/s", 0, 0, DISPLAY_WIDTH, DISPLAY_HEIGHT, TD_CENTER_CENTER, __null, 2, fg_color);
+    textBox("RTC update\nsuccess!\ncorrected by\n" + String(diff) + "s\nin\n" + String(diff2) + "s\nthat's\n" + String(float(diff) / float(diff2)) + "s/s", 0, 0, DISPLAY_WIDTH, DISPLAY_HEIGHT, TD_CENTER_CENTER, __null, 2, fg_color);
     dp.display(false);
 }
 bool updateTimeT()
@@ -212,24 +219,24 @@ bool updateTimeT()
     String url = parseText("url", cfg);
     Serial.println("1");
     if (url == "")
-    return false;
+        return false;
     WiFiClientSecure *client = new WiFiClientSecure;
     client->setInsecure();
     Serial.println("2");
     if (!client)
-    return false;
+        return false;
     client->setInsecure();
     HTTPClient https;
     Serial.println("3");
     if (!https.begin(*client, url))
-    return false;
+        return false;
     Serial.println("4");
     if (https.GET() != HTTP_CODE_OK)
-    return false;
+        return false;
     File file = LittleFS.open("/timet", "w", true);
     Serial.println("5");
     if (!file)
-    return false;
+        return false;
     Serial.println("6");
     https.writeToStream(&file);
     https.end();

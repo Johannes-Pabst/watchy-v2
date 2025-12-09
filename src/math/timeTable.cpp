@@ -78,15 +78,17 @@ void parseLesson(String lstart, String lend, String ldate, String lsubject, Stri
     });
 }
 
-int getMinute(){
+int getMinute()
+{
     SimpleTime t = simpleNow();
     int minute = t.hour * 60 + t.minute;
     // int minute=8*60+30; // for testing
     return minute;
 }
-int getSecond(){
+int getSecond()
+{
     SimpleTime t = simpleNow();
-    int second = t.hour * 60*60 + t.minute*60 + t.second;
+    int second = t.hour * 60 * 60 + t.minute * 60 + t.second;
     // int second=8*60*60+30*60; // for testing
     return second;
 }
@@ -100,7 +102,7 @@ void parseTimeT()
         std::vector<DayInfo>{},
     };
     SimpleTime t = simpleNow();
-    int minute=getMinute();
+    int minute = getMinute();
     timetableinfo.date = String(t.year) + padLeft(String(t.month), 2) + padLeft(String(t.day), 2);
     for (int i = 0; i < timegridinfo.lessons.size(); i++)
     {
@@ -191,12 +193,15 @@ void parseTimeT()
     file.close();
     timetinfinstantiated = true;
 }
-void parseTimeTLazy(){
-    if(!timetinfinstantiated){
+void parseTimeTLazy()
+{
+    if (!timetinfinstantiated)
+    {
         parseTimeT();
     }
 }
-int getCurDayId(){
+int getCurDayId()
+{
     parseTimeTLazy();
     int curDayId = -1;
     for (int i = 0; i < timetableinfo.days.size(); i++)
@@ -209,16 +214,31 @@ int getCurDayId(){
     }
     return curDayId;
 }
-bool isSchoolTime(){
-    parseTimeTLazy();
-    return timetableinfo.timeGridId>=0&&timetableinfo.timeGridId<timegridinfo.lessons.size()-1;
+int getLessonId(int timeGridId)
+{
+    int lessonIndex = 0;
+    for (int j = 0; j <= timeGridId; j++)
+    {
+        if (timegridinfo.lessons[j].type == LT_LESSON)
+        {
+            lessonIndex++;
+        }
+    }
+    return lessonIndex;
 }
-bool isSchool(){
+bool isSchoolTime()
+{
+    parseTimeTLazy();
+    return timetableinfo.timeGridId >= 0 && timetableinfo.timeGridId < timegridinfo.lessons.size() - 1;
+}
+bool isSchool()
+{
     parseTimeTLazy();
     int curDayId = getCurDayId();
-    return timetableinfo.timeGridId>=timetableinfo.days[curDayId].firstMandatoryLessonId&&timetableinfo.timeGridId<=timetableinfo.days[curDayId].lastMandatoryLessonId;
+    int lessonIndex = getLessonId(timetableinfo.timeGridId);
+    return lessonIndex >= timetableinfo.days[curDayId].firstMandatoryLessonId && lessonIndex < timetableinfo.days[curDayId].lastMandatoryLessonId;
 }
-/* 
+/*
 better protocoll:
 
 u16 lesson#
