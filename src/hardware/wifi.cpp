@@ -130,9 +130,9 @@ void connectWifi()
     Serial.println(JSON.stringify(cfg));
     WiFi.mode(WIFI_STA);
     //  <experimental>
-    WiFi.setSleep(false);                // Disable power save
-    WiFi.setTxPower(WIFI_POWER_19_5dBm); // Set the highest transmit power
-    WiFi.setAutoReconnect(true);         // Automatically reconnect to Wi-Fi
+    // WiFi.setSleep(false);                // Disable power save
+    // WiFi.setTxPower(WIFI_POWER_19_5dBm); // Set the highest transmit power
+    // WiFi.setAutoReconnect(true);         // Automatically reconnect to Wi-Fi
     //  </experimental>
     std::vector<JSONVar> networks = parseList("APs", cfg);
     for (int i = 0; i < networks.size(); i++)
@@ -231,8 +231,12 @@ bool updateTimeT()
     if (!https.begin(*client, url))
         return false;
     Serial.println("4");
-    if (https.GET() != HTTP_CODE_OK)
+    int code=https.GET();
+    if (code != HTTP_CODE_OK){
+        Serial.println(code);
+        Serial.println(https.getString());
         return false;
+    }
     File file = LittleFS.open("/timet", "w", true);
     Serial.println("5");
     if (!file)
