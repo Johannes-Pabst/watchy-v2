@@ -51,6 +51,7 @@ void parseTimeTLazy();
 bool isSchoolTime();
 int getMinute();
 bool isSchool();
+bool shouldDisplaySchoolTime();
 int getCurDayId();
 int getMinute();
 int getSecond();

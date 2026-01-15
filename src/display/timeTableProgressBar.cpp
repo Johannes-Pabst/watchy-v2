@@ -22,7 +22,7 @@ String formatSecDur(int secs)
 }
 void timeTableProgressBar(int16_t x, int16_t y, int16_t w, int16_t h)
 {
-    if (isSchool())
+    if (shouldDisplaySchoolTime())
     {
         int startTime = timegridinfo.lessons[timetableinfo.timeGridId].startMin * 60;
         int endTime = timegridinfo.lessons[timetableinfo.timeGridId + 1].startMin * 60;
