@@ -243,7 +243,7 @@ bool shouldDisplaySchoolTime()
     parseTimeTLazy();
     int curDayId = getCurDayId();
     int lessonIndex = getLessonId(timetableinfo.timeGridId);
-    return lessonIndex >= timetableinfo.days[curDayId].firstMandatoryLessonId-2 && lessonIndex < timetableinfo.days[curDayId].lastMandatoryLessonId;
+    return lessonIndex >= timetableinfo.days[curDayId].firstMandatoryLessonId-2&&timetableinfo.timeGridId>=0 && lessonIndex < timetableinfo.days[curDayId].lastMandatoryLessonId;
 }
 /*
 better protocoll:
