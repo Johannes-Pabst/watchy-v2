@@ -172,9 +172,10 @@ void updateRtc()
 {
     Serial.println("h1");
     SimpleTime bevore = simpleNow();
-    setenv("TZ", "UTC0", 1);
-    tzset();
-    configTime(0, 0, "pool.ntp.org");
+    // setenv("TZ", "UTC0", 1);
+    // tzset();
+    // configTime(0, 0, "pool.ntp.org");
+    configTzTime("UTC0", "pool.ntp.org");
     Serial.println("h1");
 
     // Wait until time is retrieved

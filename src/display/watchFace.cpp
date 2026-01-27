@@ -39,8 +39,8 @@ void watchFace(){
     measureFn(leapyearWidget, (0, 24+16+24+8));
     measureFn(unixTimestampWidget, (10, 140));
     measureFn(dateWidget, (30, 120));
-    measureFn(nextLessonsWidget, (10, 150, 4));
-    measureFn(timeTableProgressBar, (0, 180, DISPLAY_WIDTH, 10));
+    measureFn(nextLessonsWidget, (0, 157, 4));
+    measureFn(timeTableProgressBar, (0, 189, DISPLAY_WIDTH, 10));
     drawPerformanceWidget(50+19+(28+6+50)+19, 0);
     
     dp.display(esp_sleep_get_wakeup_cause() == ESP_SLEEP_WAKEUP_EXT0);

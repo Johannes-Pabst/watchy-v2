@@ -103,7 +103,7 @@ void parseTimeT()
     };
     SimpleTime t = simpleNow();
     int minute = getMinute();
-    timetableinfo.date = String(t.year) + padLeft(String(t.month), 2) + padLeft(String(t.day), 2);
+    timetableinfo.date = getDateString(t);
     for (int i = 0; i < timegridinfo.lessons.size(); i++)
     {
         if (minute >= timegridinfo.lessons[i].startMin)
@@ -214,6 +214,30 @@ int getCurDayId()
     }
     return curDayId;
 }
+String getDateString(SimpleTime t)
+{
+    return String(t.year) + padLeft(String(t.month), 2) + padLeft(String(t.day), 2);
+}
+bool isSchoolDay(SimpleTime t)
+{
+    String datestr = getDateString(t);
+    for (int i = 0; i < timetableinfo.days.size(); i++)
+    {
+        if (timetableinfo.days[i].date.equals(datestr))
+        {
+            for (int j = 0; j < timetableinfo.days[i].lessonTimeSlots.size(); j++)
+            {
+                for (int k = 0; k < timetableinfo.days[i].lessonTimeSlots[j].size(); k++)
+                {
+                    if(timetableinfo.days[i].lessonTimeSlots[j][k].code!="canc."&&timetableinfo.days[i].lessonTimeSlots[j][k].code!="EVA"){
+                        return true;
+                    }
+                }
+            }
+        }
+    }
+    return false;
+}
 int getLessonId(int timeGridId)
 {
     int lessonIndex = 0;
@@ -243,7 +267,7 @@ bool shouldDisplaySchoolTime()
     parseTimeTLazy();
     int curDayId = getCurDayId();
     int lessonIndex = getLessonId(timetableinfo.timeGridId);
-    return lessonIndex >= timetableinfo.days[curDayId].firstMandatoryLessonId-2 && lessonIndex < timetableinfo.days[curDayId].lastMandatoryLessonId;
+    return lessonIndex >= timetableinfo.days[curDayId].firstMandatoryLessonId - 2 && lessonIndex < timetableinfo.days[curDayId].lastMandatoryLessonId;
 }
 /*
 better protocoll:

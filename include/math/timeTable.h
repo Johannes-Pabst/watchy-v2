@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <Arduino.h>
+#include "math/time.h"
 
 #define LT_SHORTBREAK 0
 #define LT_LONGBREAK 1
@@ -56,3 +57,5 @@ int getCurDayId();
 int getMinute();
 int getSecond();
 int getLessonId(int timeGridId);
+bool isSchoolDay(SimpleTime t);
+String getDateString(SimpleTime t);
