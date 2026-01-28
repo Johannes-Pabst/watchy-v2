@@ -201,6 +201,11 @@ void updateRtc()
     rtcData.Month = timeinfo.tm_mon + 1;
     rtcData.Year = timeinfo.tm_year + 1900 - 1970;
 
+    struct timeval tv;
+    tv.tv_sec = 0;
+    tv.tv_usec = 0;
+    settimeofday(&tv, nullptr);
+
     Serial.println("h1");
     // Set Watchy RTC
     RTC.set(rtcData);
@@ -232,8 +237,9 @@ bool updateTimeT()
     if (!https.begin(*client, url))
         return false;
     Serial.println("4");
-    int code=https.GET();
-    if (code != HTTP_CODE_OK){
+    int code = https.GET();
+    if (code != HTTP_CODE_OK)
+    {
         Serial.println(code);
         Serial.println(https.getString());
         return false;
