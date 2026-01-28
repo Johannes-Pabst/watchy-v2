@@ -220,6 +220,7 @@ String getDateString(SimpleTime t)
 }
 bool isSchoolDay(SimpleTime t)
 {
+    parseTimeTLazy();
     String datestr = getDateString(t);
     for (int i = 0; i < timetableinfo.days.size(); i++)
     {

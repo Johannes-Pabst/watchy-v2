@@ -46,16 +46,24 @@ void nextLessonsWidget(int x, int y, int number)
             }
             std::vector<LessonInfo> &lessons = curDay.lessonTimeSlots[lessonIndex];
             int xh=0;
+            int w=0;
+            textBox("l"+String(lessonIndex)+" ", x+xh, y + i * 8, 200, 8, TD_TOP_LEFT, nullptr, 1, fg_color, &w);
+            xh+=w;
+            boolean mandatory=false;
             for (int j = 0; j < lessons.size(); j++)
             {
                 LessonInfo &lesson = lessons[j];
                 String lessonTimeStr = lesson.subject + "@" + lesson.room + " ";
-                int w=0;
-                textBox("l"+String(lessonIndex)+" "+lessonTimeStr, x, y + i * 8, 200, 8, TD_TOP_LEFT, nullptr, 1, fg_color, &w);
+                textBox(lessonTimeStr, x+xh, y + i * 8, 200, 8, TD_TOP_LEFT, nullptr, 1, fg_color, &w);
                 if(lesson.code.equals("EVA")||lesson.code.equals("canc.")){
-                    dp.drawLine(xh, y+i*8+3, xh+w, y+i*8+3 ,fg_color);
+                    dp.drawLine(xh+x, y+i*8+3, xh+w+x-6, y+i*8+3 ,fg_color);
+                }else{
+                    mandatory=true;
                 }
                 xh+=w;
+            }
+            if(!mandatory){
+                dp.drawLine(x, y+i*8+3, x+6*2, y+i*8+3 ,fg_color);
             }
         }else if(type==LT_LONGBREAK){
             int breakIndex = 0;
