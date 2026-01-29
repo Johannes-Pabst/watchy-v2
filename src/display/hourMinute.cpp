@@ -5,7 +5,12 @@
 #include "display/alignment.h"
 #include "math/time.h"
 
-void hourMinuteWidget(int16_t x, int16_t y, int16_t width, int16_t height, const GFXfont *f, uint8_t fontSize){
-    SimpleTime t=simpleNow();
+void hourMinuteWidget(int16_t x, int16_t y, int16_t width, int16_t height, const GFXfont *f, uint8_t fontSize,boolean utc){
+    SimpleTime t;
+    if(utc){
+        t=simpleNowUTC();
+    }else{
+        t=simpleNow();
+    }
     textBox(String(t.hour)+':'+String(t.minute),x,y,width,height,TD_CENTER_CENTER, f, fontSize);
 }

@@ -18,6 +18,7 @@
 #include "display/unixTimestampWidget.h"
 #include "display/timeTableProgressBar.h"
 #include "display/dateWidget.h"
+#include "display/worldMapWidget.h"
 #include "math/sky.h"
 #include "images/tinyFont.h"
 
@@ -26,6 +27,7 @@ void watchFace(){
     dp.fillScreen(bg_color);
 
     measureFn(hourMinuteWidget, (0,0,DISPLAY_WIDTH,DISPLAY_HEIGHT,&tinyFont,6));
+    measureFn(hourMinuteWidget, (0,0,6*5,DISPLAY_HEIGHT,nullptr,1, true));
     measureFn(batteryWidget, (0,0));
     measureFn(temperatureWidget, (0,24));
     measureFn(moonRenderWidget, (10, 130, 7));
@@ -41,13 +43,13 @@ void watchFace(){
     measureFn(dateWidget, (30, 120));
     measureFn(nextLessonsWidget, (0, 157, 4));
     measureFn(timeTableProgressBar, (0, 189, DISPLAY_WIDTH, 10));
+    measureFn(worldMapWidget, (120, 120));
     drawPerformanceWidget(50+19+(28+6+50)+19, 0);
     
     dp.display(esp_sleep_get_wakeup_cause() == ESP_SLEEP_WAKEUP_EXT0);
 }
 /*
 TODO:
-day in month,
 month,
 year,
 weekday,

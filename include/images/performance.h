@@ -57,3 +57,7 @@ const unsigned char epd_bitmap_dateWidget [] PROGMEM = {
 const unsigned char epd_bitmap_timeTableProgressBar [] PROGMEM = {
 	0x00, 0x54, 0x00, 0xea, 0xf4, 0xea, 0xf4
 };
+// 'worldMap', 7x7px
+const unsigned char epd_bitmap_worldMapWidget [] PROGMEM = {
+	0x20, 0xde, 0xdc, 0x52, 0x52, 0x00, 0xfe
+};
