@@ -236,7 +236,7 @@ public:
                                                                            unsigned int day,   unsigned int month,   unsigned int year,
                                                                            unsigned int hours, unsigned int minutes, unsigned int seconds);
 
-private:
+// private:
     
     /*! Compute apparent sideral time (in floating hours) for a given date and time.
      *  Reference: Chapter 7, page 35: Temps sidéral à Greenwich. */
