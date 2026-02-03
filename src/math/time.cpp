@@ -86,7 +86,7 @@ void fixTime(SimpleTime &t)
     if (t.second < 0)
     {
         int temp = (-t.second) / 60 + 1;
-        t.minute += temp;
+        t.minute -= temp;
         t.second += 60 * temp;
     }
     if (t.minute >= 60)
@@ -97,7 +97,7 @@ void fixTime(SimpleTime &t)
     if (t.minute < 0)
     {
         int temp = (-t.minute) / 60 + 1;
-        t.hour += temp;
+        t.hour -= temp;
         t.minute += 60 * temp;
     }
     if (t.hour >= 24)
@@ -108,8 +108,8 @@ void fixTime(SimpleTime &t)
     if (t.hour < 0)
     {
         int temp = (-t.hour) / 24 + 1;
-        t.day += temp;
-        t.wday += temp;
+        t.day -= temp;
+        t.wday -= temp;
         t.hour += 24 * temp;
     }
     if (t.wday < 0)
