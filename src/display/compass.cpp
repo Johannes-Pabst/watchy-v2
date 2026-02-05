@@ -25,6 +25,7 @@ void betterFillTriangle(int16_t x0, int16_t y0, int16_t x1, int16_t y1, int16_t 
         }
     }
 }
+// circle with center (x, y) with radius
 void compassWidget(int16_t x, int16_t y, int16_t radius, SolarSystemObjectIndex obj)
 {
     SolarSystemObject *s = getCurrent(obj);

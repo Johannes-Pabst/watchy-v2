@@ -9,6 +9,7 @@
 #define T_WITH_JD(day, time) ((day - 2451545.0 + time) / 36525)
 #define COSD(value) cos((value) * 0.0174532925)
 
+// 52 * 40
 void worldMapWidget(uint16_t x, uint16_t y)
 {
     uint16_t width = 52;

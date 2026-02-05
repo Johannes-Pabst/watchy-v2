@@ -24,7 +24,7 @@ float year_to_uniform_float(int year) {
     const double inv = 1.0 / 4294967296.0;  // 2^32
     return (float)(h * inv);
 }
-
+// 36 * 24
 void leapyearWidget(int16_t x, int16_t y){
     SimpleTime t=simpleNow();
     if(isLeapYear(t.year)){

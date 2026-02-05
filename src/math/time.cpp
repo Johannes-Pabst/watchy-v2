@@ -203,3 +203,19 @@ long getUnixTimestamp(SimpleTime &t){
     }
     return timestamp;
 }
+int floor_div(int a, int b) {
+    int q = a / b;
+    int r = a % b;
+    return (r != 0 && ((r > 0) != (b > 0))) ? q - 1 : q;
+}
+int getWeekNumber(SimpleTime &t){
+    int daysSinceYearStart=t.day;
+    for(int m=1;m<t.month;m++){
+        daysSinceYearStart+=getMonthLength(m, t.year);
+    }
+    int daysSinceJan4th=daysSinceYearStart-4;
+    int jan4thwday=t.wday-daysSinceJan4th;
+    int wdayStartW1=(floor_div(jan4thwday,7))*7;
+    int weekNum=(t.wday-wdayStartW1)/7;
+    return weekNum;
+}

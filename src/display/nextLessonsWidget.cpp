@@ -4,6 +4,7 @@
 #include "display/text.h"
 #include "display/alignment.h"
 
+// inf * (number * 8)
 void nextLessonsWidget(int x, int y, int number)
 {
     parseTimeTLazy();

@@ -3,6 +3,7 @@
 #include "display/alignment.h"
 #include "math/time.h"
 
+// 60 * 8
 void unixTimestampWidget(int x, int y){
     SimpleTime now = simpleNowUTC();
     long timestamp = getUnixTimestamp(now);

@@ -6,6 +6,7 @@
 #include "display/alignment.h"
 #include "hardware/bma.h"
 
+// 30 * 16
 void temperatureWidget(int16_t x, int16_t y){
     float celsius=getTemp();
     float fahrenheit=celsius*1.8+32;

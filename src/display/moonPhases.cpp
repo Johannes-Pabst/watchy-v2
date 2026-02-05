@@ -25,6 +25,7 @@ void clearMoonPhaseCache(){
         phaseIds[i]=0;
     }
 }
+// 20 * 40
 void moonPhasesWidget(int16_t x, int16_t y){
     /*
     phases:

@@ -24,3 +24,4 @@ SimpleTime simpleNow();
 SimpleTime simpleNowUTC();
 void fixTime(SimpleTime &t);
 long getUnixTimestamp(SimpleTime &t);
+int getWeekNumber(SimpleTime &t);

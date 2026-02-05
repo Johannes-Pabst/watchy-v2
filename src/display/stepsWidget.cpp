@@ -6,6 +6,7 @@
 #include "math/padUtils.h"
 #include "images/performance.h"
 
+// 38 * 8
 void stepsWidget(int16_t x, int16_t y){
     int steps=getSteps();
     textBox(padLeft(String(steps), 5), x, y, 5*6, 8, TD_TOP_LEFT);

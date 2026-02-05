@@ -6,6 +6,7 @@
 #include "images/battery.h"
 #include "display/alignment.h"
 
+// 30 * 24
 void batteryWidget(int16_t x, int16_t y){
     float percentage=getBatteryPercentage();
     if(percentage>15){

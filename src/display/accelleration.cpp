@@ -3,6 +3,7 @@
 #include "display/text.h"
 #include "display/alignment.h"
 
+// 42 * 24
 void accellerationWidget(int16_t x, int16_t y){
     Accel acc;
     getAcc(acc);

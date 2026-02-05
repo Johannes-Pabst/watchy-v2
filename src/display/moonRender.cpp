@@ -7,6 +7,7 @@
 #include "math/vec3.h"
 #include "math/sky.h"
 
+// circle  at center (x, y) with radius
 void moonRenderWidget(int16_t x, int16_t y, int16_t radius)
 {
     SolarSystemObject *moon = getCurrent(EarthsMoon);
