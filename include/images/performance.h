@@ -61,3 +61,7 @@ const unsigned char epd_bitmap_timeTableProgressBar [] PROGMEM = {
 const unsigned char epd_bitmap_worldMapWidget [] PROGMEM = {
 	0x20, 0xde, 0xdc, 0x52, 0x52, 0x00, 0xfe
 };
+// 'wakeReason', 7x7px
+const unsigned char epd_bitmap_wakeReasonWidget [] PROGMEM = {
+    0x10, 0x54, 0x92, 0x92, 0x82, 0x44, 0x38
+};

@@ -2,6 +2,8 @@
 #include <WatchyRTC.h>
 
 WatchyRTC RTC;
+int reason=esp_sleep_get_wakeup_cause();
+uint64_t pins=esp_sleep_get_ext1_wakeup_status();
 
 void initRTC() {
     RTC.init();

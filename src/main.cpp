@@ -15,13 +15,11 @@ void setup()
     Serial.begin(115200);
     Serial.flush();
     initHardware();
-    int reason=esp_sleep_get_wakeup_cause();
-    int pins=esp_sleep_get_ext1_wakeup_status();
     if (reason != ESP_SLEEP_WAKEUP_EXT0 && reason != ESP_SLEEP_WAKEUP_EXT1)
     {
         buzz(100);
     }
-    if((reason==ESP_SLEEP_WAKEUP_EXT1&&(pins&MENU_BTN_MASK))||digitalRead(MENU_BTN_PIN)==HIGH){
+    if(((reason==ESP_SLEEP_WAKEUP_EXT1)&&((pins&MENU_BTN_MASK)>0))||digitalRead(MENU_BTN_PIN)==HIGH){
         openMainMenu();
     }
     watchFace();

@@ -19,6 +19,7 @@
 #include "display/timeTableProgressBar.h"
 #include "display/dateWidget.h"
 #include "display/worldMapWidget.h"
+#include "display/wakeReasonWidget.h"
 #include "math/sky.h"
 #include "images/tinyFont.h"
 
@@ -44,6 +45,7 @@ void watchFace(){
     measureFn(nextLessonsWidget, (0, 157, 4));
     measureFn(timeTableProgressBar, (0, 189, DISPLAY_WIDTH, 10));
     measureFn(worldMapWidget, (120, 120));
+    measureFn(wakeReasonWidget, (112, 120));
     drawPerformanceWidget(50+19+(28+6+50)+19, 0);
     
     dp.display(esp_sleep_get_wakeup_cause() == ESP_SLEEP_WAKEUP_EXT0);
@@ -63,5 +65,4 @@ wake reason,
 procedural pattern,
 quote,
 drift estimator,
-
 */
