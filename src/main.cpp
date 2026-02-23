@@ -1,5 +1,4 @@
 #include <Arduino.h>
-#include "hardware/display.h"
 #include <WatchyRTC.h>
 #include "hardware/rtc.h"
 #include "hardware/bma.h"
