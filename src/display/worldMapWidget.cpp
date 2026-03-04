@@ -81,9 +81,11 @@ void worldMapWidget(uint16_t x, uint16_t y)
             minlon = min(minlon, lon);
             maxlat = max(maxlat, lat);
             maxlon = max(maxlon, lon);
+            bool land=(((epd_bitmap_world_map[(ix + iy * width) / 8] << ((ix + iy * width) % 8)) & 0b10000000) > 0);
             if (
-                (((epd_bitmap_world_map[(ix + iy * width) / 8] << ((ix + iy * width) % 8)) & 0b10000000) > 0) ==
-                (dot > 0))
+                // land == (dot > 0)
+                (land&&(dot>0))||((!land)&&((ix+iy)%2==0))
+                )
             {
                 dp.drawPixel(x + ix, y + iy, fg_color);
             }

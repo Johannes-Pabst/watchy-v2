@@ -27,26 +27,27 @@ void watchFace(){
     dp.setFullWindow();
     dp.fillScreen(bg_color);
 
-    measureFn(hourMinuteWidget, (0,0,DISPLAY_WIDTH,DISPLAY_HEIGHT,&tinyFont,6));
+    resetEphemeris();
+    measureFn(hourMinuteWidget, (0,0,DISPLAY_WIDTH,DISPLAY_HEIGHT-5*2,&tinyFont,6));
     measureFn(hourMinuteWidget, (0,0,6*5,DISPLAY_HEIGHT,nullptr,1, true));
     measureFn(batteryWidget, (0,0));
     measureFn(temperatureWidget, (0,24));
-    measureFn(moonRenderWidget, (10, 130, 7));
     measureFn(moonPhasesWidget, (30, 0));
+    measureFn(wakeReasonWidget, (42, 40));
     measureFn(SSOGraphWidget, (50, 0,28+6+50,38, EarthsMoon, TD1_START));
     measureFn(SSOGraphWidget, (50, 38,28+6+50,38, Sun, TD1_END));
+    measureFn(moonRenderWidget, (50+28+6+50-11+19*2, 100-6/2-5-1, 11));
     measureFn(compassWidget, (50+19+(28+6+50), 19, 19, EarthsMoon));
     measureFn(compassWidget, (50+19+(28+6+50), 19+38, 19, Sun));
     measureFn(accellerationWidget, (0, 24+16));
     measureFn(stepsWidget, (0, 24+16+24));
-    measureFn(leapyearWidget, (0, 24+16+24+8));
-    measureFn(unixTimestampWidget, (10, 140));
-    measureFn(dateWidget, (30, 120));
+    measureFn(leapyearWidget, (0, 24+16+24+8, 5));
+    measureFn(dateWidget, (0, 113-5));
+    measureFn(unixTimestampWidget, (0, 149));
     measureFn(nextLessonsWidget, (0, 157, 4));
     measureFn(timeTableProgressBar, (0, 189, DISPLAY_WIDTH, 10));
-    measureFn(worldMapWidget, (120, 120));
-    measureFn(wakeReasonWidget, (112, 120));
-    drawPerformanceWidget(50+19+(28+6+50)+19, 0);
+    measureFn(worldMapWidget, (121, 113-5));
+    drawPerformanceWidget(50+19+(28+6+50)+19+2, 0);
     
     dp.display(esp_sleep_get_wakeup_cause() == ESP_SLEEP_WAKEUP_EXT0);
 }

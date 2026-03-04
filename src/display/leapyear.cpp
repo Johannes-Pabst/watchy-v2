@@ -1,4 +1,6 @@
 #include "display/leapyear.h"
+#include "display/text.h"
+#include "display/alignment.h"
 #include "hardware/display.h"
 #include "images/dino.h"
 #include "math/time.h"
@@ -24,19 +26,20 @@ float year_to_uniform_float(int year) {
     const double inv = 1.0 / 4294967296.0;  // 2^32
     return (float)(h * inv);
 }
-// 36 * 24
-void leapyearWidget(int16_t x, int16_t y){
+// 9*years * 24
+void leapyearWidget(int16_t x, int16_t y, int years){
     SimpleTime t=simpleNow();
     if(isLeapYear(t.year)){
         dp.drawBitmap(x, y, epd_bitmap_dino, 9, 11, fg_color);
     }else{
         dp.drawBitmap(x, y+12, epd_bitmap_dino, 9, 11, fg_color);
     }
-    for(int i=0;i<4;i++){
+    for(int i=0;i<years;i++){
         if(isLeapYear(t.year+i)){
             dp.drawBitmap(x+i*9, y+12, epd_bitmap_cactus, 9, 11, fg_color);
         }else if(i>0){
             dp.drawBitmap(x+i*9, y+12, epd_bitmap_paths[int(year_to_uniform_float(t.year+i)*4)], 9, 11, fg_color);
         }
     }
+    textBox(String(t.year), x, y, 9*years, 11, TD_TOP_CENTER);
 }

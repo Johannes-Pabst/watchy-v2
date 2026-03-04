@@ -8,8 +8,8 @@ SolarSystemObject solarSystemObjects[10]={};
 bool sky_initialized[10]={};
 
 SolarSystemObject* getCurrent(SolarSystemObjectIndex obj){
-    resetEphemeris();
     if(!sky_initialized[obj]){
+        resetEphemeris();
         SimpleTime t=simpleNowUTC();
         solarSystemObjects[obj]=calculatePos(obj, &t);
         sky_initialized[obj]=true;
