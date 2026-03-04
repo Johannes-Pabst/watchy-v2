@@ -23,7 +23,10 @@ TimeGridInfo timegridinfo = TimeGridInfo{
         TimeslotInfo{60 * 13 + 15, LT_LESSON},
         TimeslotInfo{60 * 13 + 55, LT_LESSON},
         TimeslotInfo{60 * 14 + 40, LT_LESSON},
-        TimeslotInfo{60 * 15 + 30, LT_END},
+        TimeslotInfo{60 * 15 + 25, LT_SHORTBREAK},
+        TimeslotInfo{60 * 15 + 30, LT_LESSON},
+        TimeslotInfo{60 * 16 + 15, LT_LESSON},
+        TimeslotInfo{60 * 17 + 00, LT_END},
     }};
 
 TimeTableInfo timetableinfo;

@@ -70,5 +70,10 @@
         "regex": "cpp",
         "mutex": "cpp",
         "thread": "cpp"
-    }
+    },
+    "clangd.arguments": [
+        "--compile-commands-dir=.pio/build/watchy_v2",
+        "--query-driver=/home/johannes/.platformio/packages/toolchain-xtensa-esp32/bin/xtensa-esp32-elf-*",
+        "--extra-arg=-isystem/home/johannes/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/newlib/platform_include"
+    ]
 }
