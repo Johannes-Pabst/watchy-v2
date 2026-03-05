@@ -47,7 +47,7 @@ void watchFace(){
     measureFn(nextLessonsWidget, (0, 157, 4));
     measureFn(timeTableProgressBar, (0, 189, DISPLAY_WIDTH, 10));
     measureFn(worldMapWidget, (121, 113-5));
-    drawPerformanceWidget(50+19+(28+6+50)+19+2, 0);
+    drawPerformanceWidget(50+19+(28+6+50)+19+3, 0);
     
     dp.display(esp_sleep_get_wakeup_cause() == ESP_SLEEP_WAKEUP_EXT0);
 }
