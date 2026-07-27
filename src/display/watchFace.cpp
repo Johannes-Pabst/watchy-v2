@@ -29,7 +29,7 @@ void watchFace(){
 
     resetEphemeris();
     measureFn(hourMinuteWidget, (0,0,DISPLAY_WIDTH,DISPLAY_HEIGHT-5*2,&tinyFont,6));
-    measureFn(hourMinuteWidget, (0,0,6*5,DISPLAY_HEIGHT,nullptr,1, true));
+    measureFn(hourMinuteWidget, (0,0,6*5,DISPLAY_HEIGHT+8*2*2,nullptr,1, true));
     measureFn(batteryWidget, (0,0));
     measureFn(temperatureWidget, (0,24));
     measureFn(moonPhasesWidget, (30, 0));
@@ -41,12 +41,12 @@ void watchFace(){
     measureFn(compassWidget, (50+19+(28+6+50), 19+38, 19, Sun));
     measureFn(accellerationWidget, (0, 24+16));
     measureFn(stepsWidget, (0, 24+16+24));
-    measureFn(leapyearWidget, (0, 24+16+24+8, 5));
-    measureFn(dateWidget, (0, 113-5));
+    measureFn(leapyearWidget, (0, 24+16+24+8*3, 5));
+    measureFn(dateWidget, (0, 121));
     measureFn(unixTimestampWidget, (0, 149));
     measureFn(nextLessonsWidget, (0, 157, 4));
     measureFn(timeTableProgressBar, (0, 189, DISPLAY_WIDTH, 10));
-    measureFn(worldMapWidget, (121, 113-5));
+    measureFn(worldMapWidget, (121+2*6, 113-5));
     drawPerformanceWidget(50+19+(28+6+50)+19+3, 0);
     
     dp.display(esp_sleep_get_wakeup_cause() == ESP_SLEEP_WAKEUP_EXT0);

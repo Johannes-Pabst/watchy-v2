@@ -15,39 +15,23 @@
 #include "hardware/bluetooth.h"
 
 void openMainMenu(){
-    switch(drawMenu(std::vector<String>{"open AP", "show options", "update RTC", "clear cache", "fetch timetable", "shut down"})){
+    switch(drawMenu(std::vector<String>{"open AP", "update RTC", "clear cache", "fetch timetable", "shut down"})){
         case 0:
         setupAP();
         awaitButtonPress(0);
         stopAP();
         break;
         case 1:
-        {
-            File file=LittleFS.open("/config.json");
-    
-            dp.setFullWindow();
-            dp.fillScreen(bg_color);
-            textBox(file.readString(),0,0,200,200,TD_CENTER_CENTER);
-            dp.display(false);
-    
-            Serial.println(file.readString());
-            file.close();
-            while(digitalRead(BACK_BTN_PIN)==LOW){
-                delay(100);
-            }
-        }
-        break;
-        case 2:
         connectWifi();
         waitForConnection();
         updateRtc();
         disconnectWifi();
         break;
-        case 3:
+        case 2:
         clearMoonPhaseCache();
         clearSSOGraphCache();
         break;
-        case 4:
+        case 3:
         connectWifi();
         waitForConnection();
         if(updateTimeT()){
@@ -59,7 +43,7 @@ void openMainMenu(){
         }
         disconnectWifi();
         break;
-        case 5:
+        case 4:
         dp.setFullWindow();
         dp.fillScreen(bg_color);
         textBox("manually\nshut down.\npress any\nbutton\nto wake up.", 10, 10, DISPLAY_WIDTH-20, DISPLAY_HEIGHT-20, TD_CENTER_CENTER, __null, 2, fg_color);

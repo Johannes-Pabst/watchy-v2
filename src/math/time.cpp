@@ -203,6 +203,21 @@ long getUnixTimestamp(SimpleTime &t){
     }
     return timestamp;
 }
+int getDays(SimpleTime &t){
+    int days=0;
+    days+= (t.day -1);
+    for(int m=1; m<t.month; m++){
+        days+= getMonthLength(m, t.year);
+    }
+    for(int y=1970; y<t.year; y++){
+        if(isLeapYear(y)){
+            days+= 366;
+        } else {
+            days+= 365;
+        }
+    }
+    return days;
+}
 int floor_div(int a, int b) {
     int q = a / b;
     int r = a % b;
