@@ -29,6 +29,7 @@ void stepsWidget(int16_t x, int16_t y)
     }
     SimpleTime now = simpleNow();
     int days = getDays(now);
+    Serial.println(days);
     int steps = getSteps();
     if (today != days)
     {
@@ -41,6 +42,7 @@ void stepsWidget(int16_t x, int16_t y)
                 f.readBytes((char *)&temp, sizeof(int));
                 f.close();
                 graph[i] = temp;
+                Serial.println("read: "+String(temp)+" at day "+String(days+i-graphLen+1));
             }
         }
         if (LittleFS.exists("/steps/total"))
